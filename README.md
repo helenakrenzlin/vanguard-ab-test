@@ -22,8 +22,6 @@ This test was conducted to address a major pain point: Vanguard clients often ab
 3. [🎨 Exploratory Data Analysis (EDA) Key Insights](#exploratory-data-analysis-eda-key-insights)  
 4. [✨ KPI Insights](#kpi-insights)  
 5. [📊 A/B Testing Statistical Analysis](#a-b-testing-statistical-analysis)  
-6. [📄 Files in this Repository](#files-in-this-repository)  
-7. [💻 Technical Stack](#technical-stack)
 
 ---
 
@@ -83,7 +81,7 @@ The raw data consisted of three datasets capturing demographic, behavioral, and 
      - Added numeric prefixes to `process_step` (e.g., `start` → `step_1`) to ensure proper sorting. 
      - Converted `process_step` into an ordered categorical column for analysis.
    - **Chronological sorting of sessions per client_id**:
-   - Sorted the dataset by `client_id`, `visit_id`, `date_time`to identidy the "first" row(session)  
+     - Sorted the dataset by `client_id`, `visit_id`, `date_time`to identidy the "first" row(session)  
    - **Age Groups**:
      - Segmented clients into age groups (e.g. young/adult/senior).
    -**Adding Seconds per Step**:
@@ -156,7 +154,9 @@ The raw data consisted of three datasets capturing demographic, behavioral, and 
    - **Test**: 32.68%  
    - **Insight**: The Test group demonstrates a lower drop-off rate, suggesting that users in the Test group are less likely to abandon the process. This reflects better retention, which could be attributed to the more engaging or user-friendly design in the Test group.
 
+
 ---
+
 
 ### **Overall Summary**  
 - **Improved Process Completion**: The Test group shows higher completion rates and lower drop-offs, indicating that the changes introduced are generally favorable for user experience.
@@ -164,9 +164,11 @@ The raw data consisted of three datasets capturing demographic, behavioral, and 
 - **Rise in Interaction Errors**: Despite higher completion, the Test group saw a slight increase in the error rate (54.70% vs. 53.21%), which may point to specific areas of confusion or friction within the new interface.
 **Efficiency Trade-off:** The data reveals a trade-off where the Test design successfully drives more users to finish the process but requires more time and results in slightly more backward navigation compared to the Control version.
 
+
 ---
 
-# 📊 A/B Testing Statistical Analysis   
+
+# 📊 A/B Testing Statistical Analysis (to be checked)  
 
 This analysis evaluates the effectiveness of the new user interface (Test group) compared to the existing design (Control group) through statistical hypothesis testing.  
 
@@ -215,22 +217,6 @@ The **primary goal** is to determine whether the **new UI significantly improves
 ## 🚀 Conclusion  
 The **new UI is a clear success**, showing **statistically and practically significant improvements** in completion rates.  
 ??? A full rollout is supported, with potential further analysis on **client balance** impacts.  
-
----
-
-# 📄 Files in this Repository
-
-| **Category**  | **File Name**                                    | **Description**                                        |
-|---------------|--------------------------------------------------|--------------------------------------------------------|
-| **Data**      | `raw_data`                                       | Unprocessed datasets from the experiment               |
-|               | `clean_vanguard.csv`                             | Cleaned and transformed datasets                       
-| **Notebooks** | `1_vanguard_cleaning_and_wrangling.ipynb`        | Data exploration, cleaning & wrangling                 |
-|               | `2_vanguard_EDA.ipynb`                           | Exploratory data analysis                              |
-|               | `3_vanguard_KPIs.ipynb`                          | KPI analysis                                           |
-|               | `4_vanguard_hypotheses.ipynb`                    | Statistical hypothesis testing                         |
-| **Visuals**   | `EDA_visuals`                                    | Generated charts and graphs                            |
-|               | `Tableau`                                        | Tableau exports/screenshots                            |
-| **Presentation** | `vanguard_ab_test.pdf`                        | Presentation for executives                            |
 
 --- 
 
