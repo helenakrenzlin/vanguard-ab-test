@@ -23,9 +23,7 @@ This test was conducted to address a major pain point: Vanguard clients often ab
 4. [✨ KPI Insights](#kpi-insights)  
 5. [📊 A/B Testing Statistical Analysis](#a-b-testing-statistical-analysis)  
 6. [📄 Files in this Repository](#files-in-this-repository)  
-7. [💻 Technical Stack](#technical-stack)  
-8. [🤝 Contributions](#contributions)  
-9. [📝 License](#license)  
+7. [💻 Technical Stack](#technical-stack)
 
 ---
 
@@ -60,13 +58,13 @@ The raw data consisted of three datasets capturing demographic, behavioral, and 
 # ✅ Data Cleaning & Preprocessing
 
 ### 1. **Merging and Consolidation**
-   - Unified `df_web_data_pt_1` and `df_web_data_pt_2` into a single DataFrame using `pd.concat()`.
-   - Merged demographic and experiment data (`df_demo` and `df_experiment_clients`) using an outer join on `client_id`.
-   - ?? Combined web interaction and demographic data into a final DataFrame (`df`) using a left join on `client_id`.
+   - Unified `df_web_data_pt_1` and `df_web_data_pt_2` into a single DataFrame (called df_web) using `pd.concat()`.
+   - Merged demographic and experiment data (`df_demo` and `df_experiment`) using an outer join on `client_id`.
+   - Merged unified web_data and experiment dara (`df_web` and `df_experiment`) using an inner joint on `client_id`. 
 
 ### 2. **Handling Missing Values**
    - Dropped rows with missing `control_test` values (~57% of rows).
-   - ???Filled missing demographic and numeric values with 0.
+   - Dropped rows missing demographic and the rows with missing numeric values were filled with the median.
    - Assigned "U" (Unknown) to missing gender values.
 
 ### 3. **Standardizing and Cleaning Columns**
@@ -74,7 +72,7 @@ The raw data consisted of three datasets capturing demographic, behavioral, and 
    - Organized columns for usability.
 
 ### 4. **Removing Duplicates**
-   - Identified and removed duplicate rows based on `session_id`, `client_dev_id`, `process_step`, and `date_time`.
+   - Identified and removed duplicate rows based on `visit_id`, `client_id`, `process_step`, and `date_time`.
 
 ### 5. **Data Type Adjustments**
    - Converted `date_time` to a datetime format.
@@ -82,18 +80,21 @@ The raw data consisted of three datasets capturing demographic, behavioral, and 
 
 ### 6. **Enhancements and Segmentations**
    - **Process Step Sorting**:
-     - Added numeric prefixes to `process_step` (e.g., `start` → `0_start`) to ensure proper sorting. 
+     - Added numeric prefixes to `process_step` (e.g., `start` → `step_1`) to ensure proper sorting. 
      - Converted `process_step` into an ordered categorical column for analysis.
+   - **Chronological sorting of sessions per client_id**:
+   - Sorted the dataset by `client_id`, `visit_id`, `date_time`to identidy the "first" row(session)  
    - **Age Groups**:
-     - Segmented clients into age groups (e.g. young/adult).
+     - Segmented clients into age groups (e.g. young/adult/senior).
+   -**Adding Seconds per Step**:
+     - Calculated the seconds spend between each step and
 
 ---
 
 # 🎨 Exploratory Data Analysis (EDA) Key Insights
 
 ## **Demographics**
-- The **average client age is 48.5 years**, with a wide range from **16 to 96 years**. The age distribution is similar between groups, with the majority of users between 25 and 65 years old.
-  Performance was similar through the process steps, indicating that age was not a differentiating factor.
+- The **average client age is 48 years**, with a wide range from **17 to 96 years**. The age distribution is similar between groups, with the majority of users between 30 and 60 years old asigned to the `adult`group.
 
 - **Gender distribution is fairly even** and shows no impact on performance: **34% unknown**, **34% male**, **32% female**.
 
@@ -107,48 +108,62 @@ The raw data consisted of three datasets capturing demographic, behavioral, and 
 
 ## **Digital Engagement**
 - Clients log on an average of **6 times over 6 months**.
-- **75% of clients log on 9 or fewer times**, with the **top quartile being highly active (9+ logons)**.
+- **75% of clients log on 8 or fewer times**, with the **top quartile being highly active (9+ logons)**.
 
 ## **Support Needs**
-- Clients make an average of **3.2 calls per 6 months**.
-- **75% of clients make 6 or fewer calls**.
-- There’s a **strong correlation between logons and calls (Pearson = 0.99)**, with **logons occurring roughly twice as often as calls** (mean: **6.28 vs. 3.23**).
+- Clients make an average of **3 calls per 6 months**.
+- **75% of clients make 5 or fewer calls**.
+- There’s a **strong correlation between logons and calls (Pearson = 0.99)**, with **logons occurring roughly twice as often as calls** (mean: **6.13 vs. 3.09**).
 - The distribution is **consistent across control and test groups**.
 
 ## **Step Progression Efficiency**
-- **Test group users progress more consistently** through the process, particularly in the **final step**.
+- **Test group users progress more consistently** About 32-33% of the activity happens at the start, but only 12-14% reaches the **confirm stage**.
+
+## **Seconds Spent Per Step**
+- **Test group users take slightly less time per step**. But at the final **confirm stage**, as shown by the **higher concentration of time spent** there.
+
 ---
 
 # ✨ KPI Insights
 
-#### 1. **Completion Rate**
-   - **Definition**: The number of users who reached the ‘confirm’ step divided by the total number of users in that group.
-   - **Control**: 49.85%  
-   - **Test**: 58.52%  
-   - **Insight**: The Test group shows a notable increase in completion rate compared to the Control group, which indicates that the changes implemented in the Test version had a positive impact on user engagement and the likelihood of completing the process.
+#### 1. **Global Completion Rate**
+   - **Definition**: The number of users who reached the ‘confirm’ step (whithout having backward errors) divided by the total number of users.
+   - **Control**: 65.59%  
+   - **Test**: 69.29%  
+   - **Insight**: The Test group shows an increase in completion rate compared to the Control group, which indicates that the changes implemented in the Test version had a positive impact on user engagement and the likelihood of completing the process.
 
-#### 2. **Average Time per Step (s)**
+#### 2. **Completion Rate**
+   - **Definition**: The number of users who reached the ‘confirm’ step divided by the total number of users.
+   - **Control**: 65.59%  
+   - **Test**: 69.29%  
+   - **Insight**: The Test group shows an increase in completion rate compared to the Control group, which indicates that the changes implemented in the Test version had a positive impact on user engagement and the likelihood of completing the process.
+
+#### 3. **Average Time per Step (s)**
    - **Definition**: The average time spent by users on each process step, measured in seconds.
-   - **Control**: 96.68 seconds  
-   - **Test**: 93.17 seconds  
-   - **Insight**: Users in the Test group take slightly less time per step, suggesting improved efficiency. This could be a result of a more intuitive process flow or interface, leading to faster task completion.
+   - **Control**: 103.03 seconds  
+   - **Test**: 116.86 seconds  
+   - **Insight**: On average, users in the **Test group spend 13.84 seconds more per step than those in the Control group**. This increase is primarily driven by the confirm stage, where Test users spend significantly more time (**243.69s vs 168.73s**). While the Test group is actually faster in the initial start, step_2, and step_3 phases, the substantial time spent on the final step suggests that the new design may be encouraging deeper engagement or requiring more thorough review before completion.
 
-#### 3. **Error Rate**
+#### 4. **Error Rate**
    - **Definition**: The percentage of users who move backward in the process, indicating errors or confusion.
-   - **Control**: 19.08%  
-   - **Test**: 24.26%  
+   - **Control**: 53.21%  
+   - **Test**: 54.70%  
    - **Insight**: The Test group has a higher error rate, which is a point of concern. This could be indicative of issues with the new interface or process flow, possibly creating confusion that leads to more errors, despite the higher completion rate.
 
-#### 4. **Drop-Off Rate**
-   - **Definition**: The percentage of users who leave the process at each step.
-   - **Control**: 32.31%  
-   - **Test**: 30.06%  
+#### 5. ** Overall Drop-Out Rate (Final Client Interaction) **
+   - **Definition**: The percentage of users who left the process before reaching the last step (confirm).
+   - **Control**: 41.87%  
+   - **Test**: 32.68%  
    - **Insight**: The Test group demonstrates a lower drop-off rate, suggesting that users in the Test group are less likely to abandon the process. This reflects better retention, which could be attributed to the more engaging or user-friendly design in the Test group.
+
 ---
 
 ### **Overall Summary**  
-- **Positive**: The Test group shows higher completion rates, faster task completion, and lower drop-offs, indicating that the changes introduced are generally favorable for user experience.  
-- **Improvement Needed**: The higher error rate in the Test group should be investigated further to identify and resolve potential usability issues that may be affecting the overall user experience.
+- **Improved Process Completion**: The Test group shows higher completion rates and lower drop-offs, indicating that the changes introduced are generally favorable for user experience.
+- **Enhanced Retention**: The Test group achieved a significantly lower drop-out rate of 32.68% compared to 41.87% in the Control group, indicating that users are more likely to stay in the funnel until the end.
+- **Rise in Interaction Errors**: Despite higher completion, the Test group saw a slight increase in the error rate (54.70% vs. 53.21%), which may point to specific areas of confusion or friction within the new interface.
+**Efficiency Trade-off:** The data reveals a trade-off where the Test design successfully drives more users to finish the process but requires more time and results in slightly more backward navigation compared to the Control version.
+
 ---
 
 # 📊 A/B Testing Statistical Analysis   
