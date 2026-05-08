@@ -178,40 +178,35 @@ The **primary goal** is to determine whether the **new UI significantly improves
 ## 📌 Key Hypothesis Tests  
 ### **1️⃣ Completion Rate Analysis (Primary Focus)**
 #### **Standard Completion Rate Test (Two-Proportion Z-Test)**
-- **H₀**: No significant difference in completion rates.  
-- **H₁**: The new UI significantly improves completion rates.  
-- **Result**: The new design **significantly improves** completion rates (**p < 0.05**).  
+- **H₀**: Completion rate is the same in both groups 
+- **H₁**: (Reject the null hypothesis, H1 accepted):Completion rate of test group is different that from the control group.  
+- **Result**: The new design **significantly improves** completion rates (**p > 0.05**).
 
-#### **Completion Rate vs. Business Threshold (One-Sided Z-Test)**
+#### **2️⃣ Global Completion Rate Analysis (Two-Proportion Z-Test)**
+- **H₀**: Global Completion rate is the same in both groups 
+- **H₁**: (Reject the null hypothesis, H1 accepted): Global Completion rate of test group is different that from the control group.  
+- **Result**: Global Completion rate is the same in both groups (**p > 0.05**).
+
+#### **3️⃣ Completion Rate vs. Business Threshold (One-Sided Z-Test)**
 - Tests if the Test group’s **completion rate improvement meets/exceeds the 5% business viability threshold**.  
-- **Result**: The Test group surpasses the threshold (**p < 0.05**), supporting rollout.
-
-### **2️⃣ Error Rate Analysis (User Backward Navigation)**
+- **Result**: The Test group did not reach the 5% absolute (**p > 0.05**) increase required for business viability. From a purely data-driven perspective based on this specific threshold, the experiment did not meet the predefined success criteria for a full rollout.
+  
+### **4️⃣ Error Rate Analysis (User Backward Navigation)**
 - **H₀**: No significant difference in error rates (users moving backward).  
-- **H₁**: The new UI has a different error rate.  
-- **Result**: **No statistically significant difference** (**p = 0.5685**), indicating usability remains stable.  
-
-### **3️⃣ Client Balance Comparison (T-Test)**
-- **H₀**: No significant difference in client balance between groups.  
-- **H₁**: Significant balance difference exists.  
-- **Result**: A **statistically significant difference in balance** (**p = 0.0048**), requiring further analysis.  
-
-### **4️⃣ Client Tenure Analysis (Welch’s T-Test)**
-#### **Tenure by Month**  
-- **H₀**: No significant difference in tenure (months).  
-- **H₁**: Significant difference in tenure exists.  
-- **Result**: **No significant difference** (**p = 0.4578**).  
-
-#### **Tenure by Year**  
-- **H₀**: No significant difference in tenure (years).  
-- **H₁**: Significant difference in tenure exists.  
-- **Result**: **No significant difference** (**p = 0.5677**).  
+- **H₁**: The error rates differ between control and test group. 
+- **Result**: **No statistically significant difference** (**p = 0.2637**), indicating usability remains stable.
+- 
+### **5️⃣ Average Time Spent by Step (T-Test)**
+#### **Measured in Seconds**  
+- **H₀**: The mean of time spend in each step is the same in both groups.  
+- **H₁**: The mean of time spend in each step is different between the groups. 
+- **Result**: **Statistical significant difference** (**p = 0.028**).  
+  
 
 ## 💡 Key Takeaways  
 ✅ **Completion rates significantly improve** with the new UI.  
-✅ The **improvement surpasses the 5% business viability threshold**, supporting adoption.  
-✅ **Error rates remain stable**, meaning no usability concerns.  
-✅ **Balance differences** exist and may require further exploration.  
+✅ The **improvement does not surpasses the 5% business viability threshold**, supporting adoption.  
+✅ **Error rates remain stable**, meaning no usability concerns.   
 ✅ **No significant tenure differences**, suggesting user engagement is unaffected.  
 
 ## 🚀 Conclusion  
