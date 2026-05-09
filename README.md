@@ -118,7 +118,7 @@ The raw data consisted of three datasets capturing demographic, behavioral, and 
 - **Test group users progress more consistently** About 32-33% of the activity happens at the start, but only 12-14% reaches the **confirm stage**.
 
 ## **Seconds Spent Per Step**
-- **Test group users take slightly less time per step**. But at the final **confirm stage**, as shown by the **higher concentration of time spent** there.
+- **Test group users take slightly more time per step**. There is a **higher concentration of time spent** at the **confirm stage**.
 
 ---
 
@@ -126,9 +126,9 @@ The raw data consisted of three datasets capturing demographic, behavioral, and 
 
 #### 1. **Global Completion Rate**
    - **Definition**: The number of users who reached the ‘confirm’ step (whithout having backward errors) divided by the total number of users.
-   - **Control**: 65.59%  
-   - **Test**: 69.29%  
-   - **Insight**: The Test group shows an increase in completion rate compared to the Control group, which indicates that the changes implemented in the Test version had a positive impact on user engagement and the likelihood of completing the process.
+   - **Control**: 29.4%  
+   - **Test**: 29.7%  
+   - **Insight**: The Test group and the Control group shows shows the same rate in global completion showing the new UI does not create a user friendly experience, most the users completes the process with errors or repetitions.
 
 #### 2. **Completion Rate**
    - **Definition**: The number of users who reached the ‘confirm’ step divided by the total number of users.
@@ -138,15 +138,15 @@ The raw data consisted of three datasets capturing demographic, behavioral, and 
 
 #### 3. **Average Time per Step (s)**
    - **Definition**: The average time spent by users on each process step, measured in seconds.
-   - **Control**: 103.03 seconds  
-   - **Test**: 116.86 seconds  
+   - **Control**: 83.5 seconds  
+   - **Test**: 84.1 seconds  
    - **Insight**: On average, users in the **Test group spend 13.84 seconds more per step than those in the Control group**. This increase is primarily driven by the confirm stage, where Test users spend significantly more time (**243.69s vs 168.73s**). While the Test group is actually faster in the initial start, step_2, and step_3 phases, the substantial time spent on the final step suggests that the new design may be encouraging deeper engagement or requiring more thorough review before completion.
 
 #### 4. **Error Rate**
    - **Definition**: The percentage of users who move backward in the process, indicating errors or confusion.
-   - **Control**: 53.21%  
-   - **Test**: 54.70%  
-   - **Insight**: The Test group has a higher error rate, which is a point of concern. This could be indicative of issues with the new interface or process flow, possibly creating confusion that leads to more errors, despite the higher completion rate.
+   - **Control**: 61,3%  
+   - **Test**: 56,5%  
+   - **Insight**: The Control group has a higher error rate, this could be indicative that the new UI creates on average less friction compare with the control group. The Step 3 could be indicative of issues with the new interface or process flow, possibly creating confusion that leads to more errors, despite the higher completion rate.
 
 #### 5. ** Overall Drop-Out Rate (Final Client Interaction) **
    - **Definition**: The percentage of users who left the process before reaching the last step (confirm).
@@ -177,41 +177,40 @@ The **primary goal** is to determine whether the **new UI significantly improves
 
 ## 📌 Key Hypothesis Tests  
 ### **1️⃣ Completion Rate Analysis (Primary Focus)**
-#### **Standard Completion Rate Test (Two-Proportion Z-Test)**
+#### **Standard Completion Rate Test (one-Proportion Z-Test)**
 - **H₀**: Completion rate is the same in both groups 
 - **H₁**: (Reject the null hypothesis, H1 accepted):Completion rate of test group is different that from the control group.  
 - **Result**: The new design **significantly improves** completion rates (**p > 0.05**).
 
-#### **2️⃣ Global Completion Rate Analysis (Two-Proportion Z-Test)**
+#### **2️⃣ Global Completion Rate Analysis (one-Proportion Z-Test)**
 - **H₀**: Global Completion rate is the same in both groups 
 - **H₁**: (Reject the null hypothesis, H1 accepted): Global Completion rate of test group is different that from the control group.  
 - **Result**: Global Completion rate is the same in both groups (**p > 0.05**).
 
-#### **3️⃣ Completion Rate vs. Business Threshold (One-Sided Z-Test)**
+#### **3️⃣ Completion Rate vs. Business Threshold (two-Sided Z-Test)**
 - Tests if the Test group’s **completion rate improvement meets/exceeds the 5% business viability threshold**.  
 - **Result**: The Test group did not reach the 5% absolute (**p > 0.05**) increase required for business viability. From a purely data-driven perspective based on this specific threshold, the experiment did not meet the predefined success criteria for a full rollout.
   
 ### **4️⃣ Error Rate Analysis (User Backward Navigation)**
 - **H₀**: No significant difference in error rates (users moving backward).  
 - **H₁**: The error rates differ between control and test group. 
-- **Result**: **No statistically significant difference** (**p = 0.2637**), indicating usability remains stable.
+- **Result**: **No statistically significant difference** (**p > 0.05**), indicating usability remains stable.
 - 
 ### **5️⃣ Average Time Spent by Step (T-Test)**
 #### **Measured in Seconds**  
-- **H₀**: The mean of time spend in each step is the same in both groups.  
-- **H₁**: The mean of time spend in each step is different between the groups. 
-- **Result**: **Statistical significant difference** (**p = 0.028**).  
+- **H₀**: The mean of time spend in User Interface (UI) is the same in both groups.  
+- **H₁**: The mean of time spend in User Interface (UI) is different between the groups. 
+- **Result**: **Statistical significant difference** (**p > 0.05**).  
   
 
 ## 💡 Key Takeaways  
 ✅ **Completion rates significantly improve** with the new UI.  
 ✅ The **improvement does not surpasses the 5% business viability threshold**, supporting adoption.  
 ✅ **Error rates remain stable**, meaning no usability concerns.   
-✅ **No significant tenure differences**, suggesting user engagement is unaffected.  
+✅ **Significant time spend on each step**, suggesting user engagement is affected.  
 
 ## 🚀 Conclusion  
-The **new UI is a clear success**, showing **statistically and practically significant improvements** in completion rates.  
-??? A full rollout is supported, with potential further analysis on **client balance** impacts.  
+The **new UI significantly improves completion rates** but currently **falls short of the 5% business viability threshold** due to usability friction and increased error rates in early process stages. While we cannot support an immediate full rollout, we recommend an iterative approach with step-by-step implementation and additional testing—including a learning curve evaluation across all client sessions and analysis of affluent client needs based on balance significance—to decrease friction before final deployment.
 
 --- 
 
